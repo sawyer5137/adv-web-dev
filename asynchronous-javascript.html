@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+
+  <script>
+    // const doSomething = () => {
+    //   console.log("Hello");
+    // };
+    // setTimeout(doSomething, 3000);
+
+    const readLargeFile = () => {
+      console.log("Starting to read large file...");
+      setTimeout(() => console.log("Finished reading large file"), 3000);
+    };
+
+    readLargeFile();
+    console.log("Blah");
+
+    const readLargeFileWithCallback = (callback) => {
+      console.log("Starting to read large file...");
+      setTimeout(() => {
+        console.log("Finished reading large file");
+        const fileContent = "This is the large file......";
+        callback(fileContent);
+      }, 3000);
+    };
+
+    readLargeFileWithCallback((content) =>
+      console.log("FILE CONTENT:" + content)
+    );
+  </script>
+</html>

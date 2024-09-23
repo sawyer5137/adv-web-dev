@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JavaScript Review for Web III</title>
+    <script type="text/javascript">
+      window.addEventListener("load", () => {
+        // QUESTION 1
+        // Explain the difference between a 'change' event and an 'input' event
+        /*
+		An input event triggers when the user types or deletes anything in a text field. A change event triggers when the field loses focus or the user pressed the enter key. 
+		The change event also triggers from a different option element being selected.
+		*/
+
+        // QUESTION 2
+        // Explain the 'target' property of an event object (in other words, what is the 'target' of an event)
+        /*
+		The 'target' is the element that triggered the event. If you add an 'onclick' event listener to a button, the button is the target of the event when clicked.
+		*/
+
+        // QUESTION 3
+        // If you wanted to use JavaScript code to get the text that a user enters into an INPUT element
+        // which property of the INPUT element would you use?
+        /*
+		The 'value' property.
+		*/
+
+        // QUESTION 4
+        // Explain the similarities and differences betweeen a string and an array in JavaScript.
+        /*
+		Both a string and an array store a collection of data. They both store them in a specific order and can access them by an index. They also both have a length property.
+		A string stores characters while an array can store anything. They have some different methods. Strings are not mutable while arrays are.
+		*/
+
+        // QUESTION 5
+        // Explain the implicit return value of an arrow function in JavaScript
+        // and how it can be used to abbriviate your code.
+        /*
+		Arrow function can be shortened by removing the return keyword as long as the function contains only a single expression.
+		Instead of writing out 
+			const add = (a, b) => return a + b;
+		you can shorten it to
+			const addd = (a, b) => a + b;
+		*/
+
+        console.log("PROBLEM 1");
+        // There is an H3 element in the BODY (below), its id attribute
+        // is set to 'yourName'.
+        // Use JavaScript code to display your name inside the H3
+
+        const nameElement = document.getElementById("yourName");
+        nameElement.innerText = "Sawyer";
+
+        console.log("PROBLEM 2");
+        // There is an INPUT element in the BODY (below), its name attribute
+        // is set to 'yourName'.
+        // Use JavaScript code to display your name inside the INPUT (textbox)
+
+        const nameInput = document.querySelector("input[name='yourName']");
+        nameInput.value = "Sawyer";
+
+        console.log("PROBLEM 3");
+        // Use the prompt() function to ask the user to enter a number.
+        // Convert the user input into a number (an integer)
+        // If the number entered by the user is odd, then write code that 'checks' the checkbox
+        // INPUT below (its name attribute is set to 'isOdd')
+
+        let num = prompt("Enter a number");
+        num = parseInt(num);
+
+        const isOdd = document.querySelector("input[name='isOdd']");
+        isOdd.checked = num % 2 !== 0;
+
+        console.log("PROBLEM 4");
+        // Get a handle on the text INPUT element in the BODY below (its name attribute is set to 'petName')
+        // Add an event handler to the INPUT that listens for 'change' events,
+        // Add a parameter named 'evt' to the event handler
+        // Add code to the body of the event handler function that does the following:
+        // 1. Logs the 'evt' parameter (this is the event object that captures info about the event)
+        // 2. Logs the 'target' property of the event object (you should know what the 'target' of an event is)
+        // 3. Logs the 'value' property of the target (this comes in super handy for working with forms!)
+
+        const petName = document.querySelector("input[name='petName']");
+        petName.addEventListener("change", (evt) => {
+          console.log(evt);
+          console.log(evt.target);
+          console.log(evt.target.value);
+        });
+
+        // Use this array for the next few problems
+        const people = [
+          { id: 111, name: "Kong", age: 34, children: ["Ricky", "Sue"] },
+          {
+            id: 112,
+            name: "Luke",
+            age: 62,
+            children: ["Betty", "Rico", "Elena"],
+          },
+          { id: 129, name: "Betty", age: 34, children: ["Jimmy", "Lu"] },
+          { id: 131, name: "Rico", age: 38, children: ["Naomi"] },
+          { id: 134, name: "Mia", age: 17, children: [] },
+          { id: 154, name: "Tom", age: 43, children: ["Clara", "Bart"] },
+        ];
+
+        console.log("PROBLEM 5");
+        // Use bracket notation to console log the first element in the people array
+        console.log(people[0]);
+
+        console.log("PROBLEM 6");
+        // Use dot and/or bracket notation to console log the name of the first element in the people array
+        console.log(people[0].name);
+
+        console.log("PROBLEM 7");
+        // Use dot and/or bracket notation to console log the first child of the last element in the people array
+        console.log(people[people.length - 1].children[0]);
+
+        console.log("PROBLEM 8");
+        // Write code that figures out the person with the longest name
+        // Console log the person object (the one with the longest name)
+        let longestName = people[0];
+        people.forEach((p) => {
+          if (p.name.length > longestName.name.length) {
+            longestName = p;
+          }
+        });
+        console.log(longestName);
+
+        console.log("PROBLEM 9");
+        // Declare a constant named 'peopleListItems' and initialize it by
+        // calling the map() method to return an array of strings.
+        // Each string in the array should 'wrap' the name of each person with
+        // with LI tags. The array returned should look like this
+        // [
+        // 	"<li>Vue</li>",
+        // 	"<li>Luke</li>",
+        // 	"<li>Betty</li>",
+        // 	"<li>Rico</li>",
+        // 	"<li>Mia</li>",
+        // 	"<li>Tom</li>"
+        // ]
+
+        // Log the peopleListItems constant
+        const peopleListItems = people.map((p) => `<li>${p.name}</li>`);
+        console.log(peopleListItems);
+
+        console.log("PROBLEM 10");
+        // Use your response from the previous problem to populate
+        // the UL element below (its ID attribute is set to 'people-list')
+        let peopleList = document.getElementById("people-list");
+        peopleListItems.forEach((p) => {
+          let element = document.createElement("li");
+          element.innerHTML = p;
+          peopleList.appendChild(element);
+        });
+
+        // Use this array of 'song' objects to solve the following problems
+        const songs = [
+          {
+            id: 1,
+            name: "Yesterday",
+            album: "The White Album",
+            genre: "Rock",
+            price: 0.99,
+          },
+          {
+            id: 2,
+            name: "Jolene",
+            album: "The Dolly Album",
+            genre: "Country",
+            price: 1.65,
+          },
+          {
+            id: 3,
+            name: "Blue Bossa",
+            album: "The Blue Album",
+            genre: "Jazz",
+            price: 1.5,
+          },
+          {
+            id: 4,
+            name: "Folsom Prison Blues",
+            album: "The Country Album",
+            genre: "Country",
+            price: 1.25,
+          },
+        ];
+
+        console.log("PROBLEM 11");
+        // Write code that figures out which song has the highest price
+        // Then log the name of the song with the highest price
+        let highestPrice = songs[0];
+        songs.forEach((s) => {
+          if (s.price > highestPrice.price) {
+            highestPrice = s;
+          }
+        });
+        console.log(highestPrice.name);
+
+        console.log("PROBLEM 12");
+        // Use the map() method to create an array of song names
+        // Log the return value of the map() method
+        const songNames = songs.map((s) => s.name);
+        console.log(songNames);
+
+        console.log("PROBLEM 13");
+        // Use document.createElement() to create an LI element for each song name
+        // (If you want, you can use your answer from the previous problem to help with this)
+        // Display the song name in each LI element
+        // Append each LI element to the UL below (it's class attribute is set to 'song-list')
+        let songList = document.querySelector(".song-list");
+        songNames.forEach((s) => {
+          let element = document.createElement("li");
+          element.innerHTML = s;
+          songList.appendChild(element);
+        });
+
+        console.log("PROBLEM 14");
+        // Use the filter() method to create an array of song objects whose genre is 'Country'
+        // Console log the return value of the filter() method
+        const countrySongs = songs.filter((s) => s.genre === "Country");
+        console.log(countrySongs);
+
+        console.log("PROBLEM 15");
+        // Use the find() method to get the song object that has the id of 3
+        // Log the value that find() returns
+        const songId3 = songs.find((s) => s.id === 3);
+        console.log(songId3);
+      });
+    </script>
+  </head>
+  <body>
+    <!-- Problem 1 -->
+    <h3 id="yourName">Your name will go here (Problem 1)</h3>
+
+    <!-- Problem 2 -->
+    <input type="text" name="yourName" placeholder="Problem 2" />
+    <br /><br />
+
+    <!--
+		Problem 3 - use JavaSript to 'check' the checkbox 
+		if the user enters an odd number
+	-->
+    <label>
+      Odd Number (Problem 3):
+      <input type="checkbox" name="isOdd" />
+    </label>
+    <br /><br />
+
+    <!-- Problem 4 -->
+    <label>Enter a pet name (Problem 4):</label>
+    <input type="text" name="petName" value="Toodles" />
+    <br /><br />
+
+    <!-- Problem 10 -->
+    <h3>People List (Problem 10)</h3>
+    <ul id="people-list"></ul>
+
+    <!-- Problem 13 -->
+    <h3>Song List (Problem 13)</h3>
+    <ul class="song-list"></ul>
+  </body>
+</html>
